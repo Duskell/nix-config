@@ -6,7 +6,8 @@ Window.SetBackgroundBottomColor (0.0, 0.00, 0.0);
 
 # Image animation loop
 for (i = 1; i < 111; i++)
-  flyingman_image[i] = Image("progress_" + i + ".png");
+  frame = String.Format("%03d", i);
+  flyingman_image[i] = Image("progress_" + frame + ".png");
 flyingman_sprite = Sprite();
 
 
