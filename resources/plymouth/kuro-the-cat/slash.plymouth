@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=slash
+Description=simple loading slash animation
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/slash
+ScriptFile=/usr/share/plymouth/themes/slash/animated-boot.script

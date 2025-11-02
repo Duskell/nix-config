@@ -1,8 +1,0 @@
-[Plymouth Theme]
-Name=kuro-the-cat
-Description=Kuro the cat theme
-ModuleName=script
-
-[script]
-ImageDir=.
-ScriptFile=./kuro-the-cat.script
