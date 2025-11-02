@@ -7,7 +7,7 @@ in
   options.style = {
     theme = lib.mkOption {
       type = lib.types.str;
-      default = "ashes";
+      default = "isotope";
       description = "Theme for stylix";
     };
 

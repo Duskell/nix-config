@@ -6,11 +6,11 @@
   ];
 
   boot = {
-    boot.kernelParams = [
+    kernelParams = [
       "simpledrm.disable=1"
     ];
 
-    boot.initrd.kernelModules = [ "i915" ];
+    kernelModules = [ "i915" ];
 
     plymouth = {
       enable = true;
@@ -18,7 +18,6 @@
       themePackages = with pkgs; [
         self.packages.${pkgs.system}.kuro-the-cat
       ];
-      renderer = "drm";
     };
   };
 
