@@ -1,0 +1,11 @@
+# include /etc/bashrc if it exists
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+eval "$(zoxide init bash)"
+alias cd="z"
+
+alias ls="eza"
+
+alias rb='sudo nixos-rebuild switch --flake .#'
