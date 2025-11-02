@@ -9,6 +9,7 @@ screen.h = Window.GetHeight(0);
 screen.half.w = Window.GetWidth(0) / 2;
 screen.half.h = Window.GetHeight(0) / 2;
 
+
 // Question prompt
 question = null;
 answer = null;
@@ -30,6 +31,7 @@ state.time = 0.0;
 # cycle through all images
 for (i = 0; i < 111; i++)
   flyingman_image[i] = Image("progress_" + i + ".png");
+  flyingman_image[i].Scale(1200, 900);
 flyingman_sprite = Sprite();
 
 # set image position
@@ -40,7 +42,7 @@ progress = 0;
 
 fun refresh_callback ()
   {
-    flyingman_sprite.SetImage(flyingman_image[Math.Int(progress / 2) % 30]);
+    flyingman_sprite.SetImage(flyingman_image[Math.Int(progress / 2) % 111]);
     progress++;
   }
 
