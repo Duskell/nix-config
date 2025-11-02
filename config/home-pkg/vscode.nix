@@ -11,6 +11,7 @@
       "editor.fontLigatures" = true;
       "git.enableSmartCommit" = true;
       "git.confirmSync" = false;
+      "editor.tabSize" = 4;
     };
 
     profiles.default.extensions = with pkgs.vscode-extensions; [

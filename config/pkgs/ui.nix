@@ -16,10 +16,8 @@
       enable = true;
       theme = "angular";
       themePackages = with pkgs; [
-        angular
-        kuro-the-cat
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [ "red_loader" ];
+        (local-plymouth-themes.override {
+          selected_themes = [ "angular" ];
         })
       ];
     };

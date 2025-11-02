@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, self, ... }:
 
 let
   cfg = config.style;
@@ -13,7 +13,7 @@ in
 
     wallpaper = lib.mkOption {
       type = lib.types.path;
-      default = ../../resources/images/wallpapers/fever_dream.png;
+      default = "${self}/resources/images/wallpapers/fever_dream.png";
       description = "Wallpaper for stylix";
     };
   };

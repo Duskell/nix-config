@@ -52,41 +52,15 @@
     ];
 
     in {
+      overlays.default = final: prev: {
+        local-plymouth-themes = import ./config/system-pkg/plymouth-importer.nix {
+          inherit self;
+          stdenv = prev.stdenv;
+          lib = prev.lib;
+        };
+      };
+
       packages.${system} = {
-        kuro-the-cat = pkgs.stdenv.mkDerivation {
-          pname = "kuro-the-cat";
-          version = "1.0.0";
-          src = ./resources/plymouth/kuro-the-cat;
-
-          installPhase = ''
-            mkdir -p $out/share/plymouth/themes/kuro-the-cat
-            cp -r ./* $out/share/plymouth/themes/kuro-the-cat
-          '';
-
-          postInstall = ''
-            find $out/share/plymouth/themes -name "*.plymouth" -exec \
-              sed -i "s@/usr/@$out/@" {} \;
-          '';
-
-        };
-
-        angular = pkgs.stdenv.mkDerivation {
-          pname = "angular";
-          version = "1.0.0";
-          src = ./resources/plymouth/angular;
-
-          installPhase = ''
-            mkdir -p $out/share/plymouth/themes/angular
-            cp -r ./* $out/share/plymouth/themes/angular
-          '';
-
-          postInstall = ''
-            find $out/share/plymouth/themes -name "*.plymouth" -exec \
-              sed -i "s@/usr/@$out/@" {} \;
-          '';
-
-        };
-
         scripts = pkgs.stdenv.mkDerivation {
           name = "all-scripts";
           src = ./scripts;
@@ -100,8 +74,6 @@
           '';
         };
       };
-
-      legacyPackages.${system} = pkgs // self.packages.${system};
 
       nixosConfigurations = {
 
