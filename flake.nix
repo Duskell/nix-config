@@ -53,11 +53,19 @@
 
     in {
       overlays.default = final: prev: {
-        local-plymouth-themes = import ./config/system-pkg/plymouth-importer.nix {
-          inherit self;
-          stdenv = prev.stdenv;
-          lib = prev.lib;
-        };
+        local-plymouth-themes = args:
+          import ./config/system-pkg/plymouth-importer.nix ({
+            inherit self;
+            stdenv = prev.stdenv;
+            lib = prev.lib;
+          } // args);
+
+        plymouth-themes = args:
+          import ./config/system-pkg/original-plymouth-importer.nix ({
+            inherit self;
+            stdenv = prev.stdenv;
+            lib = prev.lib;
+          } // args);
       };
 
       packages.${system} = {
@@ -84,11 +92,9 @@
             system = "x86_64-linux";
           };
           modules = configSettings ++ [
-            {
-            nixpkgs.overlays = [
-                (final: prev: self.packages.${system})
-              ];
-            }
+            {nixpkgs.overlays = [
+              self.overlays.default 
+            ];}
 
             ./config/grub/desktop_grub.nix
             ./config/pkgs/ui.nix

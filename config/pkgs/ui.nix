@@ -14,9 +14,12 @@
 
     plymouth = {
       enable = true;
-      theme = "angular";
+      theme = "red_loader";
       themePackages = with pkgs; [
-        (local-plymouth-themes.override {
+        (plymouth-themes {
+          selected_themes = [ "red_loader" ]; 
+        })
+        (local-plymouth-themes {
           selected_themes = [ "angular" ];
         })
       ];
