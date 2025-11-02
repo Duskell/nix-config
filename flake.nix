@@ -72,8 +72,9 @@
 
           installPhase = ''
             mkdir -p $out/bin
+            shopt -s nullglob
             for f in $src/*; do
-              install -m755 $f $out/bin
+              install -m755 "$f" "$out/bin"
             done
           '';
         };

@@ -28,6 +28,7 @@
     inkscape
     packwiz
     youtube-music
+    caprine
 
     # fonts
     eb-garamond
