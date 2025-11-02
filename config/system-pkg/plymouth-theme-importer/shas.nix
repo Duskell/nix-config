@@ -1,7 +1,7 @@
 {
   "kuro-the-cat" = {
-    url = "";
-    sha = "";
+    url = "https://github.com/Duskell/nix-config/releases/download/plymouth-theme/kuro-the-cat.tar.gz";
+    sha = "1gzg8xx99djg4vmx0hawhgk1r7b5g4amlgak16zv340qg7a3vwxh";
   };
   "abstract_ring" = {
     url = "https://github.com/adi1090x/plymouth-themes/releases/download/v1.0/abstract_ring.tar.gz";
