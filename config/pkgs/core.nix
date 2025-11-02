@@ -33,6 +33,6 @@ in {
     zip                       # Compressor/archiver for creating and modifying zipfiles
     ethtool                   # Utility for controlling network drivers and hardware
     cifs-utils                # Tools for managing Linux CIFS client filesystems
-    convert                   # A file convert utility
+    imagemagick               # An image convert utility
   ];
 }
