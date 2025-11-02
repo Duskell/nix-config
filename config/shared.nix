@@ -57,6 +57,7 @@
     extraGroups = [
       "wheel"
       "networkmanager"
+      "sshkeys"
     ];
   };
 

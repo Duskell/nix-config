@@ -11,7 +11,9 @@
     ssh-github-duskell = {
       file = "${inputs.self}/secrets/ssh-github-duskell.age";
       path = "/var/lib/ssh/github_id";
-      mode = "0600";
+      mode = "0640"; # rw for owner, r for group
+      owner = "levente";
+      group = "sshkeys";
     };
   };
 }
