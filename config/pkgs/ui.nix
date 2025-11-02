@@ -17,7 +17,6 @@
 
   environment.systemPackages = with pkgs; [
     vulkan-tools
-    self.packages.${pkgs.system}.kuro-the-cat
   ];
 
   users.users.levente.extraGroups = [
