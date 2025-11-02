@@ -63,11 +63,6 @@
             mkdir -p $out/share/plymouth/themes/kuro-the-cat
             cp -r ./* $out/share/plymouth/themes/kuro-the-cat
           '';
-
-          meta = {
-            description = "Kuro the cat plymouth theme";
-            platforms = pkgs.platforms.all;
-          };
         };
 
         scripts = pkgs.stdenv.mkDerivation {
