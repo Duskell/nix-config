@@ -1,9 +1,9 @@
 [Plymouth Theme]
 Name=kuro-the-cat
-Description=Kuro the cat boot theme
+Description=displays kuro waking up
+Comment=created By bouteillerAlan and migrated by Duskell from plasma
 ModuleName=script
 
 [script]
-ImageDir=/usr/share/plymouth/themes/kuro-the-cat/
-ScriptFile=/usr/share/plymouth/themes/kuro-the-cat/animated-boot.script
-
+ImageDir=/usr/share/plymouth/themes/kuro-the-cat
+ScriptFile=/usr/share/plymouth/themes/kuro-the-cat/kuro-the-cat.script

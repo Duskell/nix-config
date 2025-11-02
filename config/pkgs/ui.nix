@@ -10,6 +10,8 @@
       "simpledrm.disable=1"
     ];
 
+    initrd.systemd.enable = true;
+
     kernelModules = [ "i915" ];
 
     plymouth = {
