@@ -53,15 +53,8 @@
 
     in {
       overlays.default = final: prev: {
-        local-plymouth-themes = args:
-          import ./config/system-pkg/plymouth-importer.nix ({
-            inherit self;
-            stdenv = prev.stdenv;
-            lib = prev.lib;
-          } // args);
-
         plymouth-themes = args:
-          import ./config/system-pkg/original-plymouth-importer.nix ({
+          import ./config/system-pkg/plymouth-theme-importer/package.nix ({
             stdenv = prev.stdenv;
             fetchurl = prev.fetchurl;
             lib = prev.lib;

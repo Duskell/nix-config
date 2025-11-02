@@ -14,13 +14,10 @@
 
     plymouth = {
       enable = true;
-      theme = "red_loader";
+      theme = "kuro-the-cat";
       themePackages = with pkgs; [
         (plymouth-themes {
-          selected_themes = [ "red_loader" ]; 
-        })
-        (local-plymouth-themes {
-          selected_themes = [ "angular" ];
+          selected_themes = [ "kuro-the-cat" ]; 
         })
       ];
     };

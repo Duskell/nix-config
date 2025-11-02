@@ -9,7 +9,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-
+    dracut
   ];
 
   users.users.levente.extraGroups = [ "flatpak" ];
