@@ -52,6 +52,8 @@
 
   hardware.enableAllFirmware = true;
 
+  users.groups.sshkeys = { };
+
   users.users.levente = {
     isNormalUser = true;
     extraGroups = [
