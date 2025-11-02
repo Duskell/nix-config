@@ -84,11 +84,16 @@
         };
       };
 
+      legacyPackages.${system} = pkgs // self.packages.${system};
+
       nixosConfigurations = {
 
         hp = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; inherit self; };
+          specialArgs = {
+            inherit inputs self;
+            system = "x86_64-linux";
+          };
           modules = configSettings ++ [
             ./config/grub/desktop_grub.nix
             ./config/pkgs/ui.nix

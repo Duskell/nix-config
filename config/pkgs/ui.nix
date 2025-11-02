@@ -16,7 +16,7 @@
       enable = true;
       theme = "kuro-the-cat";
       themePackages = with pkgs; [
-        self.packages.${pkgs.system}.kuro-the-cat
+        kuro-the-cat
       ];
     };
   };
