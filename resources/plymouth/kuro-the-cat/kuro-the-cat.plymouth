@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=kuro-the-cat
+Description=Kuro the cat boot theme
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/kuro-the-cat/animation
+ScriptFile=/usr/share/plymouth/themes/kuro-the-cat/animated-boot.script
