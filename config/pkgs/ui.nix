@@ -17,6 +17,9 @@
       theme = "kuro-the-cat";
       themePackages = with pkgs; [
         kuro-the-cat
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "red_loader" ];
+        })
       ];
     };
   };

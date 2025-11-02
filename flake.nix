@@ -95,6 +95,12 @@
             system = "x86_64-linux";
           };
           modules = configSettings ++ [
+            {
+            nixpkgs.overlays = [
+                (final: prev: self.packages.${system})
+              ];
+            }
+
             ./config/grub/desktop_grub.nix
             ./config/pkgs/ui.nix
             ./config/secrets.nix
