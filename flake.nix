@@ -57,12 +57,17 @@
           pname = "kuro-the-cat";
           version = "1.0.0";
           src = ./resources/plymouth/kuro-the-cat;
-          dontBuild = true;
 
           installPhase = ''
             mkdir -p $out/share/plymouth/themes/kuro-the-cat
             cp -r ./* $out/share/plymouth/themes/kuro-the-cat
           '';
+
+          postInstall = ''
+            find $out/share/plymouth/themes -name "*.plymouth" -exec \
+              sed -i "s@/usr/@$out/@" {} \;
+          '';
+
         };
 
         scripts = pkgs.stdenv.mkDerivation {

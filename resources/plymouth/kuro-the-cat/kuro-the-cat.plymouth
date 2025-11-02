@@ -4,6 +4,6 @@ Description=Kuro the cat boot theme
 ModuleName=script
 
 [script]
-ImageDir=/run/plymouth/themes/kuro-the-cat/
-ScriptFile=/run/plymouth/themes/kuro-the-cat/animated-boot.script
+ImageDir=/usr/share/plymouth/themes/kuro-the-cat/
+ScriptFile=/usr/share/plymouth/themes/kuro-the-cat/animated-boot.script
 
