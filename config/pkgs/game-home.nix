@@ -11,5 +11,6 @@
     lutris
     winetricks
     qbittorrent
+    wineWowPackages.full
   ];
 }

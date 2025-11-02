@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+mkdir -p /tmp/log
+echo "Woken up the system at: $(date)" >> /tmp/log/awake.log 2>&1
+
+for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+echo performance > "$cpu"
+done
+
+systemctl start minecraft-server-modded.service
+
+${pkgs.curl}/bin/curl -d "Woken up the server at: $(date) succesfully " ntfy.sh/server_cron_jobs  

@@ -29,6 +29,7 @@
     packwiz
     youtube-music
     caprine
+    discord
 
     # fonts
     eb-garamond
