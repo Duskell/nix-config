@@ -61,7 +61,7 @@
 
           installPhase = ''
             mkdir -p $out/share/plymouth/themes/kuro-the-cat
-            cp * $out/share/plymouth/themes/kuro-the-cat
+            cp -r $src/* $out/share/plymouth/themes/kuro-the-cat
             find $out/share/plymouth/themes/ -name \*.plymouth -exec sed -i "s@\/usr\/@$out\/@" {} \;
           '';
         };
