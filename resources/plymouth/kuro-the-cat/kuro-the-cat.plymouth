@@ -4,5 +4,5 @@ Description=Kuro the cat boot theme
 ModuleName=script
 
 [script]
-ImageDir=animation
+ImageDir=.
 ScriptFile=animated-boot.script
