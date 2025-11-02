@@ -9,6 +9,8 @@
       "workbench.iconTheme" = "material-icon-theme";
       "editor.fontFamily" = "JetBrains Mono";
       "editor.fontLigatures" = true;
+      "git.enableSmartCommit": true,
+      "git.confirmSync": false
     };
 
     profiles.default.extensions = with pkgs.vscode-extensions; [
