@@ -62,9 +62,10 @@
 
         plymouth-themes = args:
           import ./config/system-pkg/original-plymouth-importer.nix ({
-            inherit self;
             stdenv = prev.stdenv;
+            fetchurl = prev.fetchurl;
             lib = prev.lib;
+            unzip = prev.unzip;
           } // args);
       };
 

@@ -7,6 +7,7 @@
 }:
 let
   version = "1.0";
+  src = builtins.path { path = ./resources/plymouth; name = "local-plymouth-themes"; };
 in
 stdenv.mkDerivation {
   pname = "local-plymouth-themes";
@@ -17,7 +18,7 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out/share/plymouth/themes
     for theme in ${toString selected_themes}; do
-      cp -r ${self}/resources/plymouth/$theme $out/share/plymouth/themes/$theme
+      cp -r $src/$theme $out/share/plymouth/themes/$theme
     done
     find $out/share/plymouth/themes/ -name \*.plymouth -exec sed -i "s@\/usr\/@$out\/@" {} \;
   '';
