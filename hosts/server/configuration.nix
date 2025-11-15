@@ -32,6 +32,6 @@
   };
 
   age.identityPaths = [
-    "/root/.age/server.ageKey"
+    "/root/.age/server.agekey"
   ];
 }
