@@ -25,7 +25,8 @@ in {
     iotop                     # A tool to find out the processes doing the most IO
     lm_sensors                # Tools for reading hardware sensors
     lshw                      # Provide detailed information on the hardware configuration of the machine
-    rsync                     # Fast incremental file transfer utility
+    rsync                     # Fast incremental file transfer utility between two devices
+    rclone                    # Same as Rsync just for cloud stuff (e.g. GDrive)
     neovim                    # Text editor
     unrar                     # Utility for RAR archives
     unzip                     # An extraction utility for archives compressed in .zip format

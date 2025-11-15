@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }:
 
 let
-  cfg = config.podman;
+  cfg = config.pod;
 in
 {
-  options.podman = {
+  options.pod = {
     styx = lib.mkOption {
       description = "Basically all my wp sites in one container";
       default = {};
@@ -41,6 +41,29 @@ in
             });
             default = [];
             description = "List of container volumes.";
+          };
+        };
+      };
+    };
+    mc-access = lib.mkOption {
+      description = "The container for controlling the mc server";
+      default = {};
+      type = lib.types.submodule {
+        options = {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "Enable this podman container.";
+          };
+          autoStart = lib.mkOption { # Not yet implemented
+            type = lib.types.bool;
+            default = false;
+            description = "Start the container automatically.";
+          };
+          root = lib.mkOption {
+            type = lib.types.path;
+            default = ./containers;
+            description = "Root directory for this container's files.";
           };
         };
       };
@@ -94,6 +117,10 @@ in
           (lib.optional cfg.styx.enable ''
             test -d ${cfg.styx.root} || git clone git@github.com:Duskell/styx.git ${cfg.styx.root}
             git -C ${cfg.styx.root} pull
+          '')
+          (lib.optional cfg.mc-access.enable ''
+            test -d ${cfg.mc-access.root} || git clone git@github.com:Duskell/mc-access.git ${cfg.mc-access.root}
+            git -C ${cfg.mc-access.root} pull
           '')
         ];
       };

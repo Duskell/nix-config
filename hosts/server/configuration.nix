@@ -19,6 +19,14 @@
     wakeUp.enable = true;
   };
 
+  pod = {
+    mc-access = {
+      enable = true;
+      autoStart = true;
+      root = /srv/mc-access;
+    };
+  };
+
   # FIREWALL
 
   networking.firewall = {
