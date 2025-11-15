@@ -21,8 +21,8 @@ in
             description = "Start the container automatically.";
           };
           root = lib.mkOption {
-            type = lib.types.path;
-            default = ./containers;
+            type = lib.types.str;
+            default = "./container/styx";
             description = "Root directory for this container's files.";
           };
           volumes = lib.mkOption {
@@ -61,8 +61,8 @@ in
             description = "Start the container automatically.";
           };
           root = lib.mkOption {
-            type = lib.types.path;
-            default = ./containers;
+            type = lib.types.str;
+            default = "./container/mc-access";
             description = "Root directory for this container's files.";
           };
         };

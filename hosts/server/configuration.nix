@@ -23,7 +23,7 @@
     mc-access = {
       enable = true;
       autoStart = true;
-      root = /srv/mc-access;
+      root = "/srv/mc-access";
     };
   };
 
