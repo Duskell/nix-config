@@ -16,6 +16,8 @@
 
   networking.hostName = "hp";
 
+  services.openssh.enable = true;
+
   # FIREWALL
 
   networking.firewall = {
