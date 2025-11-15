@@ -1,20 +1,32 @@
 { config, pkgs, lib, ... }:
 
-{
-  environment.systemPackages = with pkgs; [
-    kdePackages.kde-cli-tools
-    kdePackages.plasma-workspace
-  ];
+let
+  cfg = config.kde;
+in {
+  options.kde = {
+    kdeconnect = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable the kde connect app";
+    };
+  };
 
-  # PLASMA config
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager.defaultSession = "plasma";
+  config = {
+    environment.systemPackages = with pkgs; [
+      kdePackages.kde-cli-tools
+      kdePackages.plasma-workspace
 
-  # SDDM config
-  services.displayManager.sddm.enable = true;
+    ];
+    # PLASMA config
+    services.desktopManager.plasma6.enable = true;
+    services.displayManager.defaultSession = "plasma";
 
-  services.displayManager.sddm.wayland.enable = true;
+    # SDDM config
+    services.displayManager.sddm.enable = true;
 
-  # KDE apps
-  programs.kdeconnect.enable = true;
+    services.displayManager.sddm.wayland.enable = true;
+
+    # KDE apps
+    programs.kdeconnect.enable = cfg.kdeconnect;
+  };
 }

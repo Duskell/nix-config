@@ -22,9 +22,11 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nix-minecraft, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nix-minecraft, nix-flatpak, ... }:
   let
     system = "x86_64-linux";
 

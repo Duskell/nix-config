@@ -8,6 +8,9 @@
   boot = {
     kernelParams = [
       "simpledrm.disable=1"
+      "rd.systemd.quiet" 
+      "logo.nologo"
+      "vga=current"
     ];
 
     initrd.systemd.enable = true;
@@ -44,8 +47,6 @@
   };
 
   hardware.bluetooth.enable = true;
-
-  services.blueman.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
