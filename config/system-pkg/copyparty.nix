@@ -19,10 +19,13 @@
         accounts = {
             # specify the account name as the key
             levente.passwordFile = "/var/lib/copyparty/levente_password";
+
+            attila.passwordFile = "/var/lib/copyparty/attila_password";
         };
 
         groups = {
             owner = [ "levente" ];
+            users = [ "attila" ];
         };
 
         volumes = {
@@ -33,7 +36,7 @@
             # see `copyparty --help-accounts` for available options
             access = {
                 # r = "*";
-                rw = [ "levente" ];
+                rw = [ "levente" "attila" ];
             };
             # see `copyparty --help-flags` for available options
             flags = {

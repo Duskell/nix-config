@@ -23,5 +23,13 @@
       owner = "levente";
       group = "copyparty";
     };
+
+    copyparty-attila = {
+      file = "${self}/secrets/copyparty-attila.age";
+      path = "/var/lib/copyparty/attila_password";
+      mode = "0640"; # rw for owner, r for group
+      owner = "levente";
+      group = "copyparty";
+    };
   };
 }
