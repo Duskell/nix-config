@@ -14,6 +14,7 @@
             p = [ 3210 ]; # ports
             # use booleans to set binary flags
             no-reload = true;
+            shr = true;
         };
 
         accounts = {
@@ -36,7 +37,8 @@
             # see `copyparty --help-accounts` for available options
             access = {
                 # r = "*";
-                rw = [ "levente" "attila" ];
+                rwmd = [ "levente" "attila" ];
+                rw = [ "attila" ];
             };
             # see `copyparty --help-flags` for available options
             flags = {
