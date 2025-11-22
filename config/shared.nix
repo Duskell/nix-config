@@ -147,6 +147,8 @@
   environment.shellInit = ''
     eval "$(zoxide init bash)"
     alias cd="z"
+    alias pull='sudo git pull origin main'
+    alias rb='sudo nixos-rebuild switch --flake .#' 
   '';
 
   # This value determines the NixOS release from which the default
