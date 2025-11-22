@@ -6,6 +6,7 @@
   ];
 
   home.packages = with pkgs; [
+    
     android-studio
     gcc
     gnumake

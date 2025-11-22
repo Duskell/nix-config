@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, self, ... }:
+{ config, pkgs, lib, stylix, self, ... }:
 
 let
   cfg = config.style;
@@ -19,7 +19,7 @@ in
   };
 
   imports = [
-    inputs.stylix.nixosModules.stylix
+    stylix.nixosModules.stylix
   ];
 
   config = {

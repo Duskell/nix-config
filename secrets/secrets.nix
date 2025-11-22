@@ -6,4 +6,5 @@ in
 {
   "tailscale-key.age" = [ hosts ];
   "ssh_github_duskell.age" = [ hosts ];
+  "copyparty-levente.age" = [ hosts ];
 }

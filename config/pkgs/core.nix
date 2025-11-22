@@ -13,6 +13,7 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    py
     bat                       # A cat(1) clone with syntax highlighting and Git integration
     zoxide                    # A better cd
     coreutils                 # The GNU Core Utils

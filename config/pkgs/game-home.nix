@@ -12,5 +12,6 @@
     winetricks
     qbittorrent
     wineWowPackages.full
+    dotnetCorePackages.runtime_8_0-bin
   ];
 }

@@ -60,6 +60,7 @@
       "wheel"
       "networkmanager"
       "sshkeys"
+      "copyparty"
     ];
   };
 

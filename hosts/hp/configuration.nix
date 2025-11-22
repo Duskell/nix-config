@@ -9,7 +9,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    dracut
+    age
   ];
 
   users.users.levente.extraGroups = [ "flatpak" ];
@@ -24,7 +24,7 @@
     enable = true;
     trustedInterfaces = [ "tailscale0" ];
     allowedUDPPorts = [ config.services.tailscale.port ];
-    allowedTCPPorts = [  22 config.services.tailscale.port ];
+    allowedTCPPorts = [ 80  22 config.services.tailscale.port ];
     interfaces.podman1 = {
       allowedUDPPorts = [ 53 ]; # this needs to be there so that containers can look eachother's names up over DNS
     };

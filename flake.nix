@@ -24,9 +24,11 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
+
+    copyparty.url = "github:9001/copyparty";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nix-minecraft, nix-flatpak, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nix-minecraft, copyparty, stylix, ... }:
   let
     system = "x86_64-linux";
 
@@ -49,7 +51,10 @@
       }
 
       ({ pkgs, ... }: {
-        environment.systemPackages = [ self.packages.${system}.scripts ];
+        environment.systemPackages = [ 
+          self.packages.${system}.scripts
+          agenix.packages.x86_64-linux.default
+        ];
       })
     ];
 
@@ -84,7 +89,7 @@
         hp = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs self;
+            inherit stylix self;
             system = "x86_64-linux";
           };
           modules = configSettings ++ [
@@ -110,8 +115,9 @@
 
         server = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit nix-minecraft; };
           modules = configSettings ++ [
+            copyparty.nixosModules.default
             ./config/grub/headless_grub.nix
             ./config/pkgs/server.nix
             ./hosts/server/configuration.nix
@@ -121,6 +127,7 @@
               home-manager.users.levente.imports  = [
                 ./hosts/server/home.nix
               ];
+              nixpkgs.overlays = [ copyparty.overlays.default ];
             })
           ];
         };
