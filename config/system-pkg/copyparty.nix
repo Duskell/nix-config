@@ -14,7 +14,7 @@
             p = [ 3210 ]; # ports
             # use booleans to set binary flags
             no-reload = true;
-            shr = true;
+            shr = "/srv/copyparty/public";
         };
 
         accounts = {
@@ -33,7 +33,7 @@
             # create a volume at "/" (the webroot), which will
             "/" = {
             # share the contents of "/srv/copyparty"
-            path = "/srv/copyparty";
+            path = "/srv/copyparty/private";
             # see `copyparty --help-accounts` for available options
             access = {
                 # r = "*";
