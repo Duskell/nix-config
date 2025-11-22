@@ -18,7 +18,7 @@
 
         accounts = {
             # specify the account name as the key
-            levente.passwordFile = "/run/keys/copyparty/levente_password";
+            levente.passwordFile = "/var/lib/copyparty/levente_password";
         };
 
         groups = {
