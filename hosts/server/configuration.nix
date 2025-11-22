@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../config/system-pkg/copyparty.nix
     ../../config/system-pkg/systemd-timers.nix
     ../../config/system-pkg/podman.nix
     ../../config/system-pkg/minecraft-server.nix
