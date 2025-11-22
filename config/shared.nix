@@ -54,6 +54,8 @@
 
   users.groups.sshkeys = { };
 
+  users.groups.copyparty = { };
+
   users.users.levente = {
     isNormalUser = true;
     extraGroups = [
