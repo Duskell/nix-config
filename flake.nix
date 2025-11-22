@@ -115,7 +115,7 @@
 
         server = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit nix-minecraft; };
+          specialArgs = { inherit self nix-minecraft; };
           modules = configSettings ++ [
             copyparty.nixosModules.default
             ./config/grub/headless_grub.nix
