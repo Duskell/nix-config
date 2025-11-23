@@ -58,6 +58,17 @@
     "net.ipv4.conf.default.src_valid_mark" = 1;
   };
 
+  boot.kernelModules = [
+    "xt_nat"
+    "xt_MASQUERADE"
+    "iptable_nat"
+    "iptable_filter"
+    "iptable_mangle"
+    "iptable_raw"
+    "nf_nat"
+    "nf_conntrack"
+  ];
+
   networking.nat = {
     enable = true;
     enableIPv6 = true;
