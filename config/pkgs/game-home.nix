@@ -1,8 +1,9 @@
-{ config, pkgs, osConfig, ... }:
+{ config, pkgs, osConfig, nixcord, ... }:
 
 {
   imports = [
     ../home-pkg/vscode.nix
+    ../home-pkg/nixcord.nix  
   ];
 
   home.packages = with pkgs; [

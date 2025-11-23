@@ -26,6 +26,8 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
 
     copyparty.url = "github:9001/copyparty";
+
+    nixcord.url = "github:kaylorben/nixcord";
   };
 
   outputs = inputs @ {
@@ -36,6 +38,7 @@
     nix-minecraft,
     copyparty,
     stylix,
+    nixcord,
     ...
   }: let
     system = "x86_64-linux";
@@ -57,6 +60,9 @@
         home-manager.backupFileExtension = "hm-backup";
         home-manager.overwriteBackup = true;
         home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = {
+          inherit nixcord self;
+        };
       }
 
       ({pkgs, ...}: {
@@ -76,6 +82,21 @@
             unzip = prev.unzip;
           }
           // args);
+      vesktop =
+        prev.vesktop.overrideAttrs (old: let
+          filterOutObsoletePatch = patch:
+            !prev.lib.hasSuffix "use_system_vencord.patch" (builtins.toString patch);
+          patchesWithoutObsolete = prev.lib.filter filterOutObsoletePatch (old.patches or []);
+          useSystemVencordPatch =
+            prev.replaceVars {
+              src = ./patches/vesktop-use-system-vencord.patch;
+              replacements = {
+                vencord = builtins.toString prev.vencord;
+              };
+            };
+        in {
+          patches = patchesWithoutObsolete ++ [useSystemVencordPatch];
+        });
     };
 
     packages.${system} = {
@@ -97,7 +118,7 @@
       hp = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit stylix self;
+          inherit stylix nixcord self;
           system = "x86_64-linux";
         };
         modules =

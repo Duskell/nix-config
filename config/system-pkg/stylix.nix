@@ -31,7 +31,6 @@ in
       grub.enable = true;
       grub.useWallpaper = true;
       plymouth.enable = false;
-      starship.enable = true;
     };
 
     stylix.polarity = "dark";

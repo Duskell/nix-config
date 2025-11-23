@@ -1,57 +1,44 @@
-{ # https://theobori.cafe/posts/nixcord/ 
+{ 
   config,
-  lib,
-  namespace,
+  pkgs,
+  nixcord,
   ...
 }:
-let
-  inherit (lib) mkIf types strings;
-  inherit (lib.${namespace})
-    mkBoolOpt
-    mkOpt
-    enabled
-    disabled
-    ;
-
-  cfg = config.${namespace}.messages.discord;
-
-  trimWith' =
-    s:
-    strings.trimWith {
-      start = true;
-      end = true;
-    } s;
-in
 {
-  options.${namespace}.messages.discord = with types; {
-    enable = mkBoolOpt false "Whether or not to manage discord.";
-    quickCss = mkOpt str (builtins.readFile ./custom.css) "Vencord quick CSS.";
-    config = mkOpt attrs {
-      useQuickCss = ((trimWith' cfg.quickCss) != "");
+  imports = [
+    nixcord.homeModules.nixcord
+  ];
+
+  home.packages = with pkgs; [
+    vesktop
+  ];
+
+  programs.nixcord = {
+    enable = true;
+    discord.enable = false;
+    vesktop.enable = true;
+
+    config = {
+      frameless = true;
       plugins = {
-        betterFolders = enabled;
-        betterRoleContext = enabled;
-        crashHandler = enabled;
-        memberCount = enabled;
-        mentionAvatars = enabled;
-        messageLatency = enabled;
-        showHiddenThings = enabled;
-        showMeYourName = enabled;
-        webContextMenus = enabled;
-        webKeybinds = enabled;
-        webScreenShareFixes = enabled;
-        alwaysAnimate = enabled;
+        betterFolders.enable = true;
+        betterRoleContext.enable = true;
+        crashHandler.enable = true;
+        memberCount.enable = true;
+        mentionAvatars.enable = true;
+        messageLatency.enable = true;
+        showHiddenThings.enable = true;
+        showMeYourName.enable = true;
+        webContextMenus.enable = true;
+        webKeybinds.enable = true;
+        webScreenShareFixes.enable = true;
+        alwaysAnimate.enable = true;
       };
-    } "Manage the nixcord configuration.";
-  };
+    };
 
-  config = mkIf cfg.enable {
-    programs.nixcord = {
-      enable = true;
-      discord = disabled;
-      equibop.enable = true;
-
-      inherit (cfg) config quickCss;
+    extraConfig = {
+      # Some extra JSON config here
+      # ...
     };
   };
 }
