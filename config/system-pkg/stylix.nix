@@ -29,7 +29,9 @@ in
 
     stylix.targets = {
       grub.enable = true;
+      grub.useWallpaper = true;
       plymouth.enable = false;
+      starship.enable = true;
     };
 
     stylix.polarity = "dark";
@@ -43,13 +45,13 @@ in
       };
 
       sansSerif = {
-        package = pkgs.jetbrains-mono;
-        name = "JetBrains Mono";
+        package = pkgs.nerd-fonts.tinos;
+        name = "Tinos Nerd Font";
       };
 
       monospace = {
-        package = pkgs.jetbrains-mono;
-        name = "JetBrains Mono";
+        package = pkgs.nerd-fonts.fira-code;
+        name = "FiraCode Nerd Font";
       };
 
       emoji = {

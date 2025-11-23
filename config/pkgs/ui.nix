@@ -3,6 +3,7 @@
 {
   imports = [
     ../../config/system-pkg/nvidia.nix
+    ../../config/system-pkg/starship.nix
   ];
 
   boot = {

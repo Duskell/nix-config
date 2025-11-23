@@ -7,7 +7,7 @@
 
   home.packages = with pkgs; [
     steamcmd
-    prismlauncher
+    prismlauncher 
     lutris
     winetricks
     qbittorrent

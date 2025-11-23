@@ -11,3 +11,5 @@ alias ls="eza"
 alias pull='sudo git pull origin main'
 
 alias rb='sudo nixos-rebuild switch --flake .#'
+
+eval "$(starship init bash)"

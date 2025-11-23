@@ -1,5 +1,5 @@
 {
-  description = "NixOS config";
+  description = "NixOS config i guess";
 
   inputs = {
     agenix.url = "github:ryantm/agenix";
@@ -28,11 +28,19 @@
     copyparty.url = "github:9001/copyparty";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, agenix, nix-minecraft, copyparty, stylix, ... }:
-  let
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    agenix,
+    nix-minecraft,
+    copyparty,
+    stylix,
+    ...
+  }: let
     system = "x86_64-linux";
 
-    pkgs = import nixpkgs { inherit system; };
+    pkgs = import nixpkgs {inherit system;};
 
     lib = nixpkgs.lib;
 
@@ -43,59 +51,63 @@
       ./config/secrets.nix
       ./config/networking.nix
 
-      home-manager.nixosModules.home-manager {
+      home-manager.nixosModules.home-manager
+      {
         home-manager.useGlobalPkgs = true;
         home-manager.backupFileExtension = "hm-backup";
         home-manager.overwriteBackup = true;
         home-manager.useUserPackages = true;
       }
 
-      ({ pkgs, ... }: {
-        environment.systemPackages = [ 
+      ({pkgs, ...}: {
+        environment.systemPackages = [
           self.packages.${system}.scripts
           agenix.packages.x86_64-linux.default
         ];
       })
     ];
-
-    in {
-      overlays.default = final: prev: {
-        plymouth-themes = args:
-          import ./config/system-pkg/plymouth-theme-importer/package.nix ({
+  in {
+    overlays.default = final: prev: {
+      plymouth-themes = args:
+        import ./config/system-pkg/plymouth-theme-importer/package.nix ({
             stdenv = prev.stdenv;
             fetchurl = prev.fetchurl;
             lib = prev.lib;
             unzip = prev.unzip;
-          } // args);
+          }
+          // args);
+    };
+
+    packages.${system} = {
+      scripts = pkgs.stdenv.mkDerivation {
+        name = "all-scripts";
+        src = ./scripts;
+
+        installPhase = ''
+          mkdir -p $out/bin
+          shopt -s nullglob
+          for f in $src/*; do
+            install -m755 "$f" "$out/bin"
+          done
+        '';
       };
+    };
 
-      packages.${system} = {
-        scripts = pkgs.stdenv.mkDerivation {
-          name = "all-scripts";
-          src = ./scripts;
-
-          installPhase = ''
-            mkdir -p $out/bin
-            shopt -s nullglob
-            for f in $src/*; do
-              install -m755 "$f" "$out/bin"
-            done
-          '';
+    nixosConfigurations = {
+      hp = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit stylix self;
+          system = "x86_64-linux";
         };
-      };
-
-      nixosConfigurations = {
-
-        hp = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit stylix self;
-            system = "x86_64-linux";
-          };
-          modules = configSettings ++ [
-            {nixpkgs.overlays = [
-              self.overlays.default 
-            ];}
+        modules =
+          configSettings
+          ++ [
+            {
+              nixpkgs.overlays = [
+                self.overlays.default
+              ];
+            }
 
             ./config/grub/desktop_grub.nix
             ./config/pkgs/ui.nix
@@ -103,34 +115,36 @@
             ./hosts/hp/configuration.nix
             ./hosts/hp/hardware-configuration.nix
 
-            ({ pkgs, ... }: {
-              home-manager.users.levente.imports  = [
+            ({pkgs, ...}: {
+              home-manager.users.levente.imports = [
                 ./hosts/hp/home.nix
                 ./config/pkgs/dev-home.nix
                 ./config/pkgs/game-home.nix
               ];
             })
           ];
-        };
+      };
 
-        server = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit self nix-minecraft; };
-          modules = configSettings ++ [
+      server = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit self nix-minecraft;};
+        modules =
+          configSettings
+          ++ [
             copyparty.nixosModules.default
             ./config/grub/headless_grub.nix
             ./config/pkgs/server.nix
             ./hosts/server/configuration.nix
             ./hosts/server/hardware-configuration.nix
 
-            ({ pkgs, ... }: {
-              home-manager.users.levente.imports  = [
+            ({pkgs, ...}: {
+              home-manager.users.levente.imports = [
                 ./hosts/server/home.nix
               ];
-              nixpkgs.overlays = [ copyparty.overlays.default ];
+              nixpkgs.overlays = [copyparty.overlays.default];
             })
           ];
-        };
       };
     };
+  };
 }

@@ -3,6 +3,7 @@
 {
   imports = [
     ../../config/home-pkg/adwSteamTheme.nix
+    ../../config/home-pkg/nixcord.nix  
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -29,7 +30,6 @@
     packwiz
     youtube-music
     caprine
-    discord
 
     # fonts
     eb-garamond
