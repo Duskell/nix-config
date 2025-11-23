@@ -15,6 +15,12 @@
 
   networking.hostName = "server";
 
+  tail = {
+    flags = [
+      "advertise-exit-node"
+    ];
+  };
+
   timers = {
     goSleep.enable = true;
     wakeUp.enable = true;
