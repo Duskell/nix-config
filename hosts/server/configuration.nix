@@ -44,13 +44,6 @@
     interfaces.podman1 = {
       allowedUDPPorts = [ 53 ]; # this needs to be there so that containers can look eachother's names up over DNS
     };
-    redirects = [
-      {
-        proto = "tcp";
-        sourcePort = 5555;
-        destination = "192.168.1.1";
-      }
-    ];
     checkReversePath = "loose";
   };
 
