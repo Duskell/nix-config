@@ -18,6 +18,7 @@
   tail = {
     flags = [
       "advertise-exit-node"
+      "snat-subnet-routes"
     ];
   };
 
@@ -64,6 +65,10 @@
     "iptable_filter"
     "iptable_mangle"
     "iptable_raw"
+    "ip6table_nat"
+    "ip6table_filter"
+    "ip6table_mangle"
+    "ip6table_raw"
     "nf_nat"
     "nf_conntrack"
   ];
