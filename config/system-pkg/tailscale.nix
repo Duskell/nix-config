@@ -6,18 +6,18 @@ in
 { # Partly from a random blog on the tailscale site: https://tailscale.com/blog/nixos-minecraft
   options.tail = {
     args = lib.mkOption {
-      type = lib.types.listOf str;
+      type = lib.types.listOf lib.types.str;
       default = [];
       description = "Arguments to be used in the tailscale up command, authkey is default";
     };
     flags = lib.mkOption {
-      type = lib.types.listOf str;
+      type = lib.types.listOf lib.types.str;
       default = [];
       description = "Flags to be used in the tailscale up command";
     };
   };
  
-  config {
+  config = {
     environment.systemPackages = with pkgs; [
      tailscale
     ];
@@ -49,10 +49,9 @@ in
         fi
 
         # otherwise authenticate with tailscale
-        ${tailscale}/bin/tailscale up -authkey "$(cat ${config.age.secrets.tailscale-key.path} ${lib.concatStrings map (x: " -" + x) cfg.args} ${lib.concatStrings map (x: " --" + x) cfg.flags})"
+        ${tailscale}/bin/tailscale up -authkey "$(cat ${config.age.secrets.tailscale-key.path} ${lib.concatStrings (map (x: " -" + x) cfg.args)} ${lib.concatStrings (map (x: " --" + x) cfg.flags)})"
       '';
     };
-
-  }
+  };
 }
 
