@@ -18,6 +18,7 @@
   tail = {
     flags = [
       "advertise-exit-node"
+      "snat-subnet-routes"
     ];
   };
 
