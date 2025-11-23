@@ -46,6 +46,23 @@
     };
   };
 
+  # NAT
+
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+
+  networking.nat = {
+    enable = true;
+    internalInterfaces = [ "tailscale0" ];
+    externalInterface = "enp0s31f6";
+    forwardPorts = [
+      {
+        sourcePort = 5555;
+        proto = "tcp";
+        destination = "192.168.1.1";
+      }
+    ];
+  };
+
   age.identityPaths = [
     "/root/.age/server.agekey"
   ];
