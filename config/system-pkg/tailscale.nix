@@ -2,6 +2,8 @@
 
 let
   cfg = config.tail;
+  shortFlags = lib.concatStringsSep " " (map (arg: "-${arg}") cfg.args);
+  longFlags = lib.concatStringsSep " " (map (flag: "--${flag}") cfg.flags);
 in
 { # Partly from a random blog on the tailscale site: https://tailscale.com/blog/nixos-minecraft
   options.tail = {
@@ -49,9 +51,9 @@ in
         fi
 
         # otherwise authenticate with tailscale
-        ${tailscale}/bin/tailscale up -authkey "$(cat ${config.age.secrets.tailscale-key.path} ${lib.concatStrings (map (x: " -" + x) cfg.args)} ${lib.concatStrings (map (x: " --" + x) cfg.flags)})"
+        key="$(${coreutils}/bin/cat ${config.age.secrets.tailscale-key.path})"
+        ${tailscale}/bin/tailscale up -authkey "$key"${lib.optionalString (shortFlags != "") " ${shortFlags}"}${lib.optionalString (longFlags != "") " ${longFlags}"}
       '';
     };
   };
 }
-
