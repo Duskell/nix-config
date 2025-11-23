@@ -19,7 +19,6 @@
     vesktop.enable = true;
 
     config = {
-      frameless = true;
       plugins = {
         betterFolders.enable = true;
         betterRoleContext.enable = true;

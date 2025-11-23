@@ -82,17 +82,15 @@
             unzip = prev.unzip;
           }
           // args);
+
       vesktop =
         prev.vesktop.overrideAttrs (old: let
           filterOutObsoletePatch = patch:
-            !prev.lib.hasSuffix "use_system_vencord.patch" (builtins.toString patch);
+            builtins.match ".*use_system_vencord\\.patch$" (builtins.toString patch) == null;
           patchesWithoutObsolete = prev.lib.filter filterOutObsoletePatch (old.patches or []);
           useSystemVencordPatch =
-            prev.replaceVars {
-              src = ./patches/vesktop-use-system-vencord.patch;
-              replacements = {
-                vencord = builtins.toString prev.vencord;
-              };
+            prev.replaceVars ./patches/vesktop-use-system-vencord.patch {
+              vencord = builtins.toString prev.vencord;
             };
         in {
           patches = patchesWithoutObsolete ++ [useSystemVencordPatch];
