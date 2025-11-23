@@ -18,7 +18,6 @@
   tail = {
     flags = [
       "advertise-exit-node"
-      "snat-subnet-routes"
     ];
   };
 
@@ -45,6 +44,13 @@
     interfaces.podman1 = {
       allowedUDPPorts = [ 53 ]; # this needs to be there so that containers can look eachother's names up over DNS
     };
+    redirects = [
+      {
+        proto = "tcp";
+        sourcePort = 5555;
+        destination = "192.168.1.1";
+      }
+    ];
     checkReversePath = "loose";
   };
 
@@ -68,20 +74,6 @@
     "nf_nat"
     "nf_conntrack"
   ];
-
-  networking.nat = {
-    enable = true;
-    enableIPv6 = true;
-    internalInterfaces = [ "tailscale0" ];
-    externalInterface = "enp0s31f6";
-    forwardPorts = [
-      {
-        sourcePort = 5555;
-        proto = "tcp";
-        destination = "192.168.1.1";
-      }
-    ];
-  };
 
   age.identityPaths = [
     "/root/.age/server.agekey"
