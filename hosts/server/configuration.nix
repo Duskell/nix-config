@@ -44,14 +44,6 @@
     interfaces.podman1 = {
       allowedUDPPorts = [ 53 ]; # this needs to be there so that containers can look eachother's names up over DNS
     };
-    extraForwardRules = ''
-      iifname "tailscale0" oifname "enp0s31f6" accept
-      iifname "enp0s31f6" oifname "tailscale0" ct state related,established accept
-    '';
-    extraForwardRules6 = ''
-      iifname "tailscale0" oifname "enp0s31f6" accept
-      iifname "enp0s31f6" oifname "tailscale0" ct state related,established accept
-    '';
     checkReversePath = "loose";
   };
 
@@ -61,6 +53,8 @@
     "net.ipv4.ip_forward" = 1;
     "net.ipv6.conf.all.forwarding" = 1;
     "net.ipv6.conf.default.forwarding" = 1;
+    "net.ipv4.conf.all.src_valid_mark" = 1;
+    "net.ipv4.conf.default.src_valid_mark" = 1;
   };
 
   networking.nat = {
