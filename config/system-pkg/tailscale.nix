@@ -17,6 +17,11 @@ in
       default = [];
       description = "Flags to be used in the tailscale up command";
     };
+    rFeature = lib.mkOption {
+      type = lib.types.str;
+      default = "client";
+      description = "Optional setting for useRoutingFeatures";
+    };
   };
  
   config = {
@@ -26,7 +31,7 @@ in
 
     services.tailscale = {
       enable = true;
-      useRoutingFeatures = "server";
+      useRoutingFeatures = cfg.tail.rFeature;
     };
 
     systemd.services.tailscale-autoconnect = {
