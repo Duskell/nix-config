@@ -31,7 +31,7 @@ in
 
     services.tailscale = {
       enable = true;
-      useRoutingFeatures = cfg.tail.rFeature;
+      useRoutingFeatures = cfg.rFeature;
     };
 
     systemd.services.tailscale-autoconnect = {
