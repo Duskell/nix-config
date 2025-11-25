@@ -10,6 +10,7 @@
     ../../config/system-pkg/podman.nix
     ../../config/system-pkg/steam.nix
     ../../config/system-pkg/konsole.nix
+    ../../config/system-pkg/dolphin.nix
   ];
 
   environment.systemPackages = with pkgs; [
