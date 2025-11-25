@@ -12,9 +12,9 @@ in
     };
 
     wallpaper = lib.mkOption {
-      type = lib.types.path;
-      default = "${self}/resources/images/wallpapers/fever_dream.png";
-      description = "Wallpaper for stylix";
+      type = lib.types.str;
+      default = "fever_dream.png";
+      description = "Wallpaper for stylix from the resources dir";
     };
   };
 
@@ -35,7 +35,7 @@ in
 
     stylix.polarity = "dark";
 
-    stylix.image = cfg.wallpaper;
+    stylix.image = "${self}/resources/images/wallpapers/" + cfg.wallpaper;
 
     stylix.fonts = {
       serif = {
@@ -44,8 +44,8 @@ in
       };
 
       sansSerif = {
-        package = pkgs.nerd-fonts.tinos;
-        name = "Tinos Nerd Font";
+        package = pkgs.nerd-fonts.fira-code;
+        name = "FiraCode Nerd Font";
       };
 
       monospace = {

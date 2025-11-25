@@ -1,18 +1,22 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ../../config/system-pkg/kde.nix
     ../../config/system-pkg/stylix.nix
     ../../config/system-pkg/podman.nix
     ../../config/system-pkg/steam.nix
+    ../../config/system-pkg/konsole.nix
   ];
 
   environment.systemPackages = with pkgs; [
     age
   ];
 
-  users.users.levente.extraGroups = [ "flatpak" ];
+  users.users.levente.extraGroups = ["flatpak"];
 
   networking.hostName = "hp";
 
@@ -22,11 +26,11 @@
 
   networking.firewall = {
     enable = true;
-    trustedInterfaces = [ "tailscale0" ];
-    allowedUDPPorts = [ config.services.tailscale.port ];
-    allowedTCPPorts = [ 80  22 config.services.tailscale.port ];
+    trustedInterfaces = ["tailscale0"];
+    allowedUDPPorts = [config.services.tailscale.port];
+    allowedTCPPorts = [80 22 config.services.tailscale.port];
     interfaces.podman1 = {
-      allowedUDPPorts = [ 53 ]; # this needs to be there so that containers can look eachother's names up over DNS
+      allowedUDPPorts = [53]; # this needs to be there so that containers can look eachother's names up over DNS
     };
   };
 
@@ -37,4 +41,10 @@
   xdg.portal.enable = true;
 
   services.flatpak.enable = true;
+
+  konsole = {
+    profileName = "Glass";
+    opacity = 0.65;
+    blur = true;
+  };
 }

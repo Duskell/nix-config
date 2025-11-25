@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, self, ... }:
 
 let
   cfg = config.konsole;
@@ -34,7 +34,7 @@ let
     color15 = "${base07-rgb-r}, ${base07-rgb-g}, ${base07-rgb-b}";
   };
 
-  colorSchemeName = "${cfg.profileName}-Glass";
+  colorSchemeName = "${cfg.profileName}";
 
   profileText = ''
     [Appearance]
@@ -117,9 +117,10 @@ let
     Color=${modernPalette.foregroundIntense}
 
     [General]
-    Description=${cfg.profileName} Glass
+    Description=${cfg.profileName}
+    Blur=${boolToString cfg.blur}
     Opacity=${floatToString cfg.opacity}
-    Wallpaper=
+    ${lib.optionalString cfg.wallpaper.enable "    Wallpaper=${self}/resources/images/wallpapers/${cfg.wallpaper.path}\n"}
 
     [Cursor]
     Color=${modernPalette.cursor}
@@ -141,8 +142,6 @@ let
 in
 {
   options.konsole = {
-    enable = lib.mkEnableOption "custom Konsole profile";
-
     user = lib.mkOption {
       type = lib.types.str;
       default = "levente";
@@ -184,10 +183,32 @@ in
       default = 12;
       description = "Inner padding around the terminal content.";
     };
+
+    wallpaper = lib.mkOption {
+      description = "Optional wallpaper for Konsole (from resources/images/wallpapers).";
+      default = {
+        enable = false;
+        path = "fever_dream.png";
+      };
+      type = lib.types.submodule {
+        options = {
+          enable = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "Enable wallpaper behind the terminal.";
+          };
+          path = lib.mkOption {
+            type = lib.types.str;
+            default = "fever_dream.png";
+            description = "Filename under resources/images/wallpapers to use as wallpaper.";
+          };
+        };
+      };
+    };
   };
 
-  config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ konsole ];
+  config = {
+    environment.systemPackages = with pkgs; [ kdePackages.konsole ];
 
     home-manager.users."${cfg.user}" = {
       xdg.configFile."konsolerc".text = konsolercText;
