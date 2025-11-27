@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   service.nginx = {
@@ -26,10 +27,10 @@
     '';
 
     virtualHosts."api.juhaszlevente.hu" = {
-      enableACME = false;
+      enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http:127.0.0.1:9090";
+        proxyPass = "http://127.0.0.1:9090";
         proxyWebsockets = true;
         extraConfig =
           # required when the target is also TLS server with multiple hosts
@@ -40,16 +41,15 @@
       };
     };
     virtualHosts."cparty.juhaszlevente.hu" = {
-      enableACME = false;
+      enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http:127.0.0.1:3200";
+        proxyPass = "http://127.0.0.1:3200";
         proxyWebsockets = true;
-        extraConfig = 
+        extraConfig =
           "proxy_ssl_server_name on;"
-          +
-          "proxy_pass_header Authorization;";
-      }
+          + "proxy_pass_header Authorization;";
+      };
     };
   };
 }
