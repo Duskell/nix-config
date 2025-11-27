@@ -4,10 +4,18 @@
   lib,
   ...
 }: {
-  service.nginx = {
+  services.nginx = {
     enable = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
+
+    defaultListen = [
+      {
+        addr = "0.0.0.0";
+        port = 3210;
+        ssl = true;
+      }
+    ];
 
     commonHttpConfig = let
       realIpsFromList = lib.strings.concatMapStringsSep "\n" (x: "set_real_ip_from  ${x};");
@@ -39,6 +47,13 @@
           # required when the server wants to use HTTP Authentication
           "proxy_pass_header Authorization;";
       };
+      locations = {
+        "/myadmin" = {
+          proxyPass = "http://localhost:9091";
+          extraConfig = "proxy_pass_header Authorization;";
+        };
+      };
+      ;
     };
     virtualHosts."cparty.juhaszlevente.hu" = {
       enableACME = true;
