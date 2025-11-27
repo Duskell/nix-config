@@ -13,6 +13,7 @@
     ../../config/system-pkg/minecraft-server.nix
     ../../config/system-pkg/stylix.nix
     ../../config/system-pkg/starship.nix
+    ../../config/system-pkg/stylix.nix
   ];
 
   environment.systemPackages = with pkgs; [
