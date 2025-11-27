@@ -83,18 +83,16 @@
           }
           // args);
 
-      vesktop =
-        prev.vesktop.overrideAttrs (old: let
-          filterOutObsoletePatch = patch:
-            builtins.match ".*use_system_vencord\\.patch$" (builtins.toString patch) == null;
-          patchesWithoutObsolete = prev.lib.filter filterOutObsoletePatch (old.patches or []);
-          useSystemVencordPatch =
-            prev.replaceVars ./patches/vesktop-use-system-vencord.patch {
-              vencord = builtins.toString prev.vencord;
-            };
-        in {
-          patches = patchesWithoutObsolete ++ [useSystemVencordPatch];
-        });
+      vesktop = prev.vesktop.overrideAttrs (old: let
+        filterOutObsoletePatch = patch:
+          builtins.match ".*use_system_vencord\\.patch$" (builtins.toString patch) == null;
+        patchesWithoutObsolete = prev.lib.filter filterOutObsoletePatch (old.patches or []);
+        useSystemVencordPatch = prev.replaceVars ./patches/vesktop-use-system-vencord.patch {
+          vencord = builtins.toString prev.vencord;
+        };
+      in {
+        patches = patchesWithoutObsolete ++ [useSystemVencordPatch];
+      });
     };
 
     packages.${system} = {
@@ -146,7 +144,7 @@
 
       server = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit self nix-minecraft;};
+        specialArgs = {inherit stylix self nix-minecraft;};
         modules =
           configSettings
           ++ [
