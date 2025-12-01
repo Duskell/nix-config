@@ -12,7 +12,7 @@
     defaultListen = [
       {
         addr = "0.0.0.0";
-        port = 3210;
+        port = 443;
         ssl = true;
       }
     ];
