@@ -9,14 +9,6 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    defaultListen = [
-      {
-        addr = "0.0.0.0";
-        port = 443;
-        ssl = true;
-      }
-    ];
-
     commonHttpConfig = let
       realIpsFromList = lib.strings.concatMapStringsSep "\n" (x: "set_real_ip_from  ${x};");
       fileToList = x: lib.strings.splitString "\n" (builtins.readFile x);
@@ -35,7 +27,7 @@
     '';
 
     virtualHosts."api.juhaszlevente.hu" = {
-      enableACME = true;
+      enableACME = true
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:9090";
@@ -55,23 +47,23 @@
       };
     };
     virtualHosts."cparty.juhaszlevente.hu" = {
-      enableACME = true;
+      enableACME = true
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:3200";
         proxyWebsockets = true;
         extraConfig =
-          "proxy_ssl_server_name on;"
-          + "proxy_pass_header Authorization;";
+          "proxy_ssl_server_name on;" +
+          "proxy_pass_header Authorization;";
       };
     };
     virtualHosts."streber.juhaszlevente.hu" = {
-      enableACME = true;
+      enableACME = true
       forceSSL = true;
       locations."/" = {
-        root = "/srv/streber";
-        proxyWebsockets = true;
-        extraConfig = "proxy_ssl_server_name on;";
+        proxyPass = "http://127.0.0.1:3578";
+        extraConfig =
+          "proxy_ssl_server_name on;";
       };
     };
   };
