@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.loader = {
@@ -11,5 +14,6 @@
     };
 
     efi.canTouchEfiVariables = true;
+    timeout = 2;
   };
 }

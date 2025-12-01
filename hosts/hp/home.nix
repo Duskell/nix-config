@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../../config/home-pkg/adwSteamTheme.nix
   ];
@@ -29,6 +31,7 @@
     packwiz
     youtube-music
     caprine
+    gparted
 
     # fonts
     eb-garamond

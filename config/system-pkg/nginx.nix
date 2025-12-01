@@ -53,7 +53,6 @@
           extraConfig = "proxy_pass_header Authorization;";
         };
       };
-      ;
     };
     virtualHosts."cparty.juhaszlevente.hu" = {
       enableACME = true;
@@ -64,6 +63,15 @@
         extraConfig =
           "proxy_ssl_server_name on;"
           + "proxy_pass_header Authorization;";
+      };
+    };
+    virtualHosts."streber.juhaszlevente.hu" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        root = "/srv/streber";
+        proxyWebsockets = true;
+        extraConfig = "proxy_ssl_server_name on;";
       };
     };
   };

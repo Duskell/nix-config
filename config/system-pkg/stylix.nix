@@ -1,9 +1,13 @@
-{ config, pkgs, lib, stylix, self, ... }:
-
-let
-  cfg = config.style;
-in
 {
+  config,
+  pkgs,
+  lib,
+  stylix,
+  self,
+  ...
+}: let
+  cfg = config.style;
+in {
   options.style = {
     theme = lib.mkOption {
       type = lib.types.str;
@@ -23,7 +27,6 @@ in
   ];
 
   config = {
-
     stylix.enable = true;
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${cfg.theme}.yaml";
 
@@ -31,6 +34,7 @@ in
       grub.enable = true;
       grub.useWallpaper = true;
       plymouth.enable = false;
+      qt.enable = false;
     };
 
     stylix.polarity = "dark";

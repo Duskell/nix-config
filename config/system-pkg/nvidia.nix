@@ -1,9 +1,11 @@
-{ config, pkgs, lib, ... }:
-
-let
-  cfg = config.nvidia;
-in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  cfg = config.nvidia;
+in {
   options.nvidia = {
     openSource = lib.mkOption {
       type = lib.types.bool;
@@ -47,7 +49,6 @@ in
     services.xserver.videoDrivers = ["nvidia"];
 
     hardware.nvidia = {
-
       # Modesetting is required.
       modesetting.enable = true;
 
@@ -77,7 +78,9 @@ in
     };
 
     hardware.nvidia.prime = {
-      sync.enable = true;
+      offload.enable = true;
+      offload.offloadCmdMainProgram = "prime-run";
+      offload.enableOffloadCmd = true;
 
       # Make sure to use the correct Bus ID values for your system!
       intelBusId = cfg.intelBusId;
@@ -86,13 +89,13 @@ in
 
     specialisation = lib.mkIf cfg.portable {
       on-the-go.configuration = {
-        system.nixos.tags = [ "Portable" ];
+        system.nixos.tags = ["Portable"];
         hardware.nvidia = {
           prime.offload.enable = lib.mkForce true;
           prime.offload.enableOffloadCmd = lib.mkForce true;
           prime.sync.enable = lib.mkForce false;
-          };
         };
+      };
     };
 
     # Vulkan + OpenGL packages (64-bit + 32-bit)
