@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.scanRandMacAddress = true;
 
@@ -32,10 +35,12 @@
     loader.timeout = lib.mkDefault 0;
   };
 
-  swapDevices = [{
-    device = "/swapfile";
-    size = (1024 * 8);
-  }];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 1024 * 8;
+    }
+  ];
 
   time.timeZone = "Europe/Budapest";
 
@@ -52,9 +57,11 @@
 
   hardware.enableAllFirmware = true;
 
-  users.groups.sshkeys = { };
+  users.groups.sshkeys = {};
 
-  users.groups.copyparty = { };
+  users.groups.copyparty = {};
+
+  users.groups.git = {};
 
   users.users.levente = {
     isNormalUser = true;
@@ -63,6 +70,7 @@
       "networkmanager"
       "sshkeys"
       "copyparty"
+      "git"
     ];
   };
 
@@ -78,8 +86,8 @@
   # started in user sessions.
   programs.mtr.enable = true;
   programs.gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
+    enable = true;
+    enableSSHSupport = true;
   };
 
   programs.git = {
@@ -109,7 +117,7 @@
 
   # Firewall
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [22];
 
   services.syncthing.openDefaultPorts = true;
   services.openssh.openFirewall = true;
@@ -121,9 +129,10 @@
     permittedInsecurePackages = [
       # Placeholder
     ];
-    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      # Placeholder
-    ];
+    allowUnfreePredicate = pkg:
+      builtins.elem (lib.getName pkg) [
+        # Placeholder
+      ];
   };
 
   #systemd.services.startupTasks = {
@@ -148,7 +157,7 @@
     eval "$(zoxide init bash)"
     alias cd="z"
     alias pull='sudo git pull origin main'
-    alias rb='sudo nixos-rebuild switch --flake .#' 
+    alias rb='sudo nixos-rebuild switch --flake .#'
   '';
 
   # This value determines the NixOS release from which the default
@@ -158,5 +167,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }
