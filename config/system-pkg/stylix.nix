@@ -34,7 +34,7 @@ in {
       grub.enable = true;
       grub.useWallpaper = true;
       plymouth.enable = false;
-      qt.enable = false;
+      qt.enable = true;
     };
 
     stylix.polarity = "dark";

@@ -27,7 +27,7 @@
     '';
 
     virtualHosts."api.juhaszlevente.hu" = {
-      enableACME = true
+      enableACME = true;
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:9090";
@@ -47,7 +47,7 @@
       };
     };
     virtualHosts."cparty.juhaszlevente.hu" = {
-      enableACME = true
+      enableACME = true;
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:3200";
@@ -58,7 +58,7 @@
       };
     };
     virtualHosts."streber.juhaszlevente.hu" = {
-      enableACME = true
+      enableACME = true;
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:3578";

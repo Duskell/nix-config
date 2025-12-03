@@ -16,6 +16,7 @@
     ../../config/system-pkg/stylix.nix
     ../../config/system-pkg/nginx.nix
     ../../config/system-pkg/acme.nix
+    ../../config/system-pkg/static-web.nix
   ];
 
   environment.systemPackages = with pkgs; [
