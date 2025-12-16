@@ -53,8 +53,8 @@
         proxyPass = "http://127.0.0.1:3200";
         proxyWebsockets = true;
         extraConfig =
-          "proxy_ssl_server_name on;" +
-          "proxy_pass_header Authorization;";
+          "proxy_ssl_server_name on;"
+          + "proxy_pass_header Authorization;";
       };
     };
     virtualHosts."streber.juhaszlevente.hu" = {
@@ -62,8 +62,31 @@
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:3578";
-        extraConfig =
-          "proxy_ssl_server_name on;";
+        extraConfig = "proxy_ssl_server_name on;";
+      };
+    };
+
+    virtualHosts."partner.juhaszlevente.hu" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:7070";
+        extraConfig = ''
+          proxy_ssl_server_name on;
+          proxy_pass_header Authorization;
+        '';
+      };
+    };
+
+    virtualHosts."pb.juhaszlevente.hu" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:6060";
+        extraConfig = ''
+          proxy_ssl_server_name on;
+          proxy_pass_header Authorization;
+        '';
       };
     };
   };

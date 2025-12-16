@@ -28,6 +28,11 @@
     copyparty.url = "github:9001/copyparty";
 
     nixcord.url = "github:kaylorben/nixcord";
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -39,6 +44,7 @@
     copyparty,
     stylix,
     nixcord,
+    rust-overlay,
     ...
   }: let
     system = "x86_64-linux";
@@ -120,12 +126,6 @@
         modules =
           configSettings
           ++ [
-            {
-              nixpkgs.overlays = [
-                self.overlays.default
-              ];
-            }
-
             ./config/grub/desktop_grub.nix
             ./config/pkgs/ui.nix
             ./config/secrets.nix
@@ -133,6 +133,13 @@
             ./hosts/hp/hardware-configuration.nix
 
             ({pkgs, ...}: {
+              nixpkgs.overlays = [
+                self.overlays.default
+                rust-overlay.overlays.default
+              ];
+
+              environment.systemPackages = [pkgs.rust-bin.stable.latest.default];
+
               home-manager.users.levente.imports = [
                 ./hosts/hp/home.nix
                 ./config/pkgs/dev-home.nix
