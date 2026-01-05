@@ -9,6 +9,8 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
+    clientMaxBodySize = "1000m";
+
     commonHttpConfig = let
       realIpsFromList = lib.strings.concatMapStringsSep "\n" (x: "set_real_ip_from  ${x};");
       fileToList = x: lib.strings.splitString "\n" (builtins.readFile x);
