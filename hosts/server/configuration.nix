@@ -17,6 +17,7 @@
     ../../config/system-pkg/nginx.nix
     ../../config/system-pkg/acme.nix
     ../../config/system-pkg/static-web.nix
+    ../../config/system-pkg/postgres.nix
   ];
 
   environment.systemPackages = with pkgs; [

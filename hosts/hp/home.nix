@@ -33,6 +33,7 @@
     caprine
     gparted
     imagemagick
+    krita
 
     # fonts
     eb-garamond
