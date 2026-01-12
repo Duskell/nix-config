@@ -1,7 +1,11 @@
 # include /etc/bashrc if it exists
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+  . /etc/bashrc
 fi
+
+echo -e "\e[137m"
+fortune
+echo -e "\e[0m"
 
 eval "$(zoxide init bash)"
 alias cd="z"
@@ -13,3 +17,4 @@ alias pull='sudo git pull origin main'
 alias rb='sudo nixos-rebuild switch --flake .#'
 
 eval "$(starship init bash)"
+

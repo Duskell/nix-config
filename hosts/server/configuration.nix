@@ -22,6 +22,8 @@
   environment.systemPackages = with pkgs; [
     nmap
     python312Packages.speedtest-cli
+    gitea
+    gitea-actions-runner
   ];
 
   networking.hostName = "server";

@@ -32,6 +32,7 @@
     youtube-music
     caprine
     gparted
+    imagemagick
 
     # fonts
     eb-garamond
