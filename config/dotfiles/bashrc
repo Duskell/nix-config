@@ -3,6 +3,12 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
+# If not interactive, don't do anything that prints
+case $- in
+*i*) ;;
+*) return ;;
+esac
+
 echo -e "\e[137m"
 fortune
 echo -e "\e[0m"
@@ -17,4 +23,3 @@ alias pull='sudo git pull origin main'
 alias rb='sudo nixos-rebuild switch --flake .#'
 
 eval "$(starship init bash)"
-
