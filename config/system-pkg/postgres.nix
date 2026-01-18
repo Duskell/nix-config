@@ -4,7 +4,6 @@
     package = pkgs.postgresql_16;
     enableTCPIP = true;
     port = 11859;
-    ensureDatabases = ["gitea"];
     settings = {
       ssl = false;
     };
@@ -28,6 +27,7 @@
       {
         name = "gitea";
         ensureDBOwnership = true;
+        ensureDatabases = ["gitea"];
         ensureClauses = {
           login = true;
           password = "SCRAM-SHA-256$4096:KAHGMmQ3GTvFO5DzQnGrHw==$g1vuiZFMYmyP9Ku4nAsIWrqVmyWhRR1Pl0Sg+uVAz24=:TbBOohcQjoNzI3hsVbWnRSzDpYHi9nppxoacXygVeKw=";

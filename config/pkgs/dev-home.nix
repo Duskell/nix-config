@@ -20,5 +20,6 @@
     gnumake
     libgcc
     unityhub
+    devenv
   ];
 }

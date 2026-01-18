@@ -74,6 +74,8 @@
     ];
   };
 
+  nix.settings.trusted-users = ["root" "levente"];
+
   programs.ssh = {
     extraConfig = ''
       Host github.com
@@ -117,7 +119,7 @@
 
   # Firewall
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [22];
+  networking.firewall.allowedTCPPorts = [22 5500];
 
   services.syncthing.openDefaultPorts = true;
   services.openssh.openFirewall = true;
