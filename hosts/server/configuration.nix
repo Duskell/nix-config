@@ -18,13 +18,12 @@
     ../../config/system-pkg/acme.nix
     ../../config/system-pkg/static-web.nix
     ../../config/system-pkg/postgres.nix
+    ../../config/system-pkg/gitea.nix
   ];
 
   environment.systemPackages = with pkgs; [
     nmap
     python312Packages.speedtest-cli
-    gitea
-    gitea-actions-runner
   ];
 
   networking.hostName = "server";
