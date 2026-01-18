@@ -119,7 +119,7 @@
 
   # Firewall
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [22 5500];
+  networking.firewall.allowedTCPPorts = [22];
 
   services.syncthing.openDefaultPorts = true;
   services.openssh.openFirewall = true;
