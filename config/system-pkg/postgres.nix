@@ -2,7 +2,7 @@
   pkgs,
   lib,
   ...
-}: {
+}: { # FOR NOW ITS WIP
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_16;

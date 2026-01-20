@@ -2,7 +2,7 @@
   config,
   pkgs,
   ...
-}: {
+}: { # FOR NOW ITS WIP
   services.gitea = {
     enable = true;
     stateDir = "/var/lib/gitea";
