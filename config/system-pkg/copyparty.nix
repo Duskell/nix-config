@@ -17,7 +17,7 @@
       p = [3200]; # ports
       # use booleans to set binary flags
       no-reload = true;
-      shr = "/";
+      shr = "/s";
 
       # reverse-proxy / Cloudflare real-IP handling
       "xff-hdr" = "cf-connecting-ip"; # header CF fills with the client IP
