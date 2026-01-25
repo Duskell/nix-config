@@ -40,7 +40,7 @@
     volumes = {
       "/internal" = {
         path = "/srv/copyparty/internal";
-        access = { rwmd = [ "levente" ] };
+        access = { rwmd = [ "levente" ]; };
         flags = {
           norobots = true;
           fk = 4;
