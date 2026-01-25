@@ -40,17 +40,15 @@
     volumes = {
       "/internal" = {
         path = "/srv/copyparty/internal";
-        access = { rwmd = [ "levente" ]; };
+        access = {rwmd = ["levente"];};
         flags = {
           norobots = true;
           fk = 4;
           scan = 60;
           e2d = true;
           e2t = true;
-          
-
         };
-      }
+      };
 
       "/private" = {
         path = "/srv/copyparty/private";
@@ -71,7 +69,7 @@
           d2t = true;
           # skips hashing file contents if path matches *.iso
           nohash = "\.iso$";
-        
+
           norobots = true;
         };
       };
@@ -103,4 +101,3 @@
     openFilesLimit = 8192;
   };
 }
-
