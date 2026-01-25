@@ -17,7 +17,7 @@
       p = [3200]; # ports
       # use booleans to set binary flags
       no-reload = true;
-      shr = "/public";
+      shr = "/";
 
       # reverse-proxy / Cloudflare real-IP handling
       "xff-hdr" = "cf-connecting-ip"; # header CF fills with the client IP
@@ -38,13 +38,26 @@
     };
 
     volumes = {
-      "/" = {
+      "/internal" = {
+        path = "/srv/copyparty/internal";
+        access = { rwmd = [ "levente" ] };
+        flags = {
+          norobots = true;
+          fk = 4;
+          scan = 60;
+          e2d = true;
+          e2t = true;
+          
+
+        };
+      }
+
+      "/private" = {
         path = "/srv/copyparty/private";
         # see `copyparty --help-accounts` for available options
         access = {
           # r = "*";
           rwmd = ["levente" "attila"];
-          rw = ["attila"];
         };
         # see `copyparty --help-flags` for available options
         flags = {
@@ -58,10 +71,12 @@
           d2t = true;
           # skips hashing file contents if path matches *.iso
           nohash = "\.iso$";
+        
+          norobots = true;
         };
       };
 
-      "/public" = {
+      "/" = {
         path = "/srv/copyparty/public";
         # see `copyparty --help-accounts` for available options
         access = {
